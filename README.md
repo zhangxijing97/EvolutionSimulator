@@ -12,7 +12,7 @@ Instructions for using your project.
 
 ## Screenshot
 
-![Screenshot](Image/Screenshot01.png)
+![Screenshot](image/Screenshot01.png)
 
 ## Contributing
 
