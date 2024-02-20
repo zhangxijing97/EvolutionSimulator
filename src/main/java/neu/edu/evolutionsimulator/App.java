@@ -1,30 +1,38 @@
 package neu.edu.evolutionsimulator;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.util.List;
+
+import neu.edu.evolutionsimulator.model.Creature;
+import neu.edu.evolutionsimulator.model.CreatureInitializer;
+import neu.edu.evolutionsimulator.model.Map;
+import neu.edu.evolutionsimulator.view.MapView;
+import neu.edu.evolutionsimulator.controller.MapController;
 
 public class App {
 
     public static void main(String[] args) {
-        // Creating instance of JFrame
-        JFrame frame = new JFrame();
+        Map map = new Map(500, 500);
+        MapView mapView = new MapView(map);
+        MapController controller = new MapController(map);
 
-        // Creating instance of JButton
-        JButton button = new JButton(" GFG WebSite Click");
+        // Create a new creature
+        // Creature creature = new Creature(100, 100, 5); // Example position (100, 100)
+        // and speed 5
 
-        // x axis, y axis, width, height
-        button.setBounds(150, 200, 220, 50);
+        // Add the creature to the map
+        // map.addCreature(creature);
 
-        // adding button in JFrame
-        frame.add(button);
+        List<Creature> creatures = CreatureInitializer.initializeCreatures();
+        for (Creature creature : creatures) {
+            map.addCreature(creature);
+        }
 
-        // 400 width and 500 height
-        frame.setSize(500, 600);
-
-        // using no layout managers
-        frame.setLayout(null);
-
-        // making the frame visible
+        JFrame frame = new JFrame("Evolution Simulator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(mapView);
+        frame.addKeyListener(controller);
+        frame.setSize(500, 500);
         frame.setVisible(true);
 
     }
