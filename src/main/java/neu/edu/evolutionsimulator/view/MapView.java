@@ -22,7 +22,7 @@ public class MapView extends JPanel {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // Render creatures
-        g.setColor(Color.BLUE);
+        g.setColor(Color.GREEN);
         List<Creature> creatures = map.getCreatures();
         for (Creature creature : creatures) {
             g.fillOval(creature.getX(), creature.getY(), 10, 10); // Assuming creature is represented by a circle

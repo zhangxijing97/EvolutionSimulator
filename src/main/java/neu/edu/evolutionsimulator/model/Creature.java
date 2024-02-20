@@ -1,5 +1,7 @@
 package neu.edu.evolutionsimulator.model;
 
+import java.util.Random;
+
 public class Creature {
     private int x;
     private int y;
@@ -33,6 +35,21 @@ public class Creature {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public void move() {
+        // Generate random direction
+        Random random = new Random();
+        int directionX = random.nextInt(3) - 1; // -1, 0, or 1
+        int directionY = random.nextInt(3) - 1; // -1, 0, or 1
+
+        // Update position based on speed and direction
+        x += directionX * speed;
+        y += directionY * speed;
+
+        // Ensure the creature stays within the map bounds
+        x = Math.max(0, Math.min(x, 500 - 1));
+        y = Math.max(0, Math.min(y, 500 - 1));
     }
 
 }
