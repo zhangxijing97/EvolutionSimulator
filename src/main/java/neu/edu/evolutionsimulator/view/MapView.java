@@ -30,10 +30,27 @@ public class MapView extends JPanel {
         }
 
         // Render creatures
+        // g.setColor(Color.BLUE);
+        // List<Creature> creatures = map.getCreatures();
+        // for (Creature creature : creatures) {
+        // g.fillOval(creature.getX(), creature.getY(), 10, 10); // Assuming creature is
+        // represented by a circle
+        // }
+
         g.setColor(Color.BLUE);
         List<Creature> creatures = map.getCreatures();
         for (Creature creature : creatures) {
-            g.fillOval(creature.getX(), creature.getY(), 10, 10); // Assuming creature is represented by a circle
+            int creatureX = creature.getX();
+            int creatureY = creature.getY();
+            int energy = creature.getEnergy();
+
+            // Render creature as a circle
+            g.fillOval(creatureX, creatureY, 10, 10);
+
+            // Display energy value next to the creature
+            g.setColor(Color.WHITE); // Set color for text
+            g.drawString("Energy: " + energy, creatureX + 15, creatureY + 5);
+            g.setColor(Color.BLUE); // Reset color back to creature color
         }
     }
 }

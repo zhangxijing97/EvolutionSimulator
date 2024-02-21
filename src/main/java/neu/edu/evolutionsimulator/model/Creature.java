@@ -48,21 +48,6 @@ public class Creature {
         return energy;
     }
 
-    // public void move() {
-    // // Generate random direction
-    // Random random = new Random();
-    // int directionX = random.nextInt(3) - 1; // -1, 0, or 1
-    // int directionY = random.nextInt(3) - 1; // -1, 0, or 1
-
-    // // Update position based on speed and direction
-    // x += directionX * speed;
-    // y += directionY * speed;
-
-    // // Ensure the creature stays within the map bounds
-    // x = Math.max(0, Math.min(x, 500 - 1));
-    // y = Math.max(0, Math.min(y, 500 - 1));
-    // }
-
     // Move to find the foods
     public void move(List<Food> foods) {
         if (foods.isEmpty()) {
@@ -80,7 +65,18 @@ public class Creature {
 
     // Method to move randomly
     private void moveRandomly() {
-        // Implement your random movement logic here (same as before)
+        // Generate random direction
+        Random random = new Random();
+        int directionX = random.nextInt(3) - 1; // -1, 0, or 1
+        int directionY = random.nextInt(3) - 1; // -1, 0, or 1
+
+        // Update position based on speed and direction
+        x += directionX * speed;
+        y += directionY * speed;
+
+        // Ensure the creature stays within the map bounds
+        x = Math.max(0, Math.min(x, 500 - 1));
+        y = Math.max(0, Math.min(y, 500 - 1));
     }
 
     // Method to find the nearest food item
