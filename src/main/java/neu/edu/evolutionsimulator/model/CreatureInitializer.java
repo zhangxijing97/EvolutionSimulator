@@ -12,7 +12,7 @@ public class CreatureInitializer {
         List<Creature> creatures = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             int x = random.nextInt(MAP_WIDTH);
             int y = random.nextInt(MAP_HEIGHT);
             Creature creature = new Creature(x, y, 1, 1); // Assuming speed is 1

@@ -106,7 +106,7 @@ public class Map {
             double distance = Point2D.distance(creatureX, creatureY, foodX, foodY);
 
             // Check if the distance is less than 5 units
-            if (distance < 10) {
+            if (distance < 5) {
                 // Remove the food item
                 iterator.remove();
                 // You can also update the creature's energy here if needed

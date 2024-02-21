@@ -37,7 +37,7 @@ public class App {
         while (true) {
             // Move creatures
             for (Creature creature : creatures) {
-                creature.move();
+                creature.move(map.getFoods());
                 map.checkForFoodProximity(creature, map);
             }
 
