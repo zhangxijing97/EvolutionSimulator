@@ -22,18 +22,18 @@ public class MapView extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Render creatures
-        g.setColor(Color.BLUE);
-        List<Creature> creatures = map.getCreatures();
-        for (Creature creature : creatures) {
-            g.fillOval(creature.getX(), creature.getY(), 10, 10); // Assuming creature is represented by a circle
-        }
-
         // Render foods
         g.setColor(Color.GREEN);
         List<Food> foods = map.getFoods();
         for (Food food : foods) {
             g.fillOval(food.getX(), food.getY(), 5, 5); // Assuming creature is represented by a circle
+        }
+
+        // Render creatures
+        g.setColor(Color.BLUE);
+        List<Creature> creatures = map.getCreatures();
+        for (Creature creature : creatures) {
+            g.fillOval(creature.getX(), creature.getY(), 10, 10); // Assuming creature is represented by a circle
         }
     }
 }
