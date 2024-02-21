@@ -38,6 +38,7 @@ public class App {
             // Move creatures
             for (Creature creature : creatures) {
                 creature.move();
+                map.checkForFoodProximity(creature, map);
             }
 
             // Update the view with the new positions of creatures

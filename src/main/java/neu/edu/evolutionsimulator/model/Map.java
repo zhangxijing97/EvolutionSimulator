@@ -2,6 +2,8 @@ package neu.edu.evolutionsimulator.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
+import java.awt.geom.Point2D;
 
 public class Map {
     private int width;
@@ -60,6 +62,57 @@ public class Map {
     // Get Food
     public List<Food> getFoods() {
         return foods;
+    }
+
+    // Method to check for collision between creature and food
+    // public void checkForFoodCollision(Creature creature, Map map) {
+    // int creatureX = creature.getX();
+    // int creatureY = creature.getY();
+
+    // // Get the list of food items
+    // List<Food> foods = map.getFoods();
+
+    // // Iterate through the food items
+    // Iterator<Food> iterator = foods.iterator();
+    // while (iterator.hasNext()) {
+    // Food food = iterator.next();
+    // int foodX = food.getX();
+    // int foodY = food.getY();
+
+    // // Check if the creature and food are at the same position
+    // if (creatureX == foodX && creatureY == foodY) {
+    // // Remove the food item
+    // iterator.remove();
+    // // You can also update the creature's energy here if needed
+    // creature.setEnergy(creature.getEnergy() + food.getEnergy());
+    // }
+    // }
+    // }
+    public void checkForFoodProximity(Creature creature, Map map) {
+        int creatureX = creature.getX();
+        int creatureY = creature.getY();
+
+        // Get the list of food items
+        List<Food> foods = map.getFoods();
+
+        // Iterate through the food items
+        Iterator<Food> iterator = foods.iterator();
+        while (iterator.hasNext()) {
+            Food food = iterator.next();
+            int foodX = food.getX();
+            int foodY = food.getY();
+
+            // Calculate the distance between creature and food using Euclidean distance
+            double distance = Point2D.distance(creatureX, creatureY, foodX, foodY);
+
+            // Check if the distance is less than 5 units
+            if (distance < 10) {
+                // Remove the food item
+                iterator.remove();
+                // You can also update the creature's energy here if needed
+                creature.setEnergy(creature.getEnergy() + food.getEnergy());
+            }
+        }
     }
 
 }

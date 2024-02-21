@@ -15,7 +15,7 @@ public class CreatureInitializer {
         for (int i = 0; i < 20; i++) {
             int x = random.nextInt(MAP_WIDTH);
             int y = random.nextInt(MAP_HEIGHT);
-            Creature creature = new Creature(x, y, 1); // Assuming speed is 1
+            Creature creature = new Creature(x, y, 1, 1); // Assuming speed is 1
             creatures.add(creature);
         }
 

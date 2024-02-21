@@ -6,11 +6,13 @@ public class Creature {
     private int x;
     private int y;
     private int speed;
+    private int energy;
 
-    public Creature(int x, int y, int speed) {
+    public Creature(int x, int y, int speed, int energy) {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.energy = energy;
     }
 
     public void setX(int x) {
@@ -25,6 +27,10 @@ public class Creature {
         this.speed = speed;
     }
 
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
     public int getX() {
         return x;
     }
@@ -35,6 +41,10 @@ public class Creature {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public int getEnergy() {
+        return energy;
     }
 
     public void move() {
