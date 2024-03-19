@@ -6,12 +6,14 @@ import java.util.Random;
 public class Creature {
     private int x;
     private int y;
+    private int fur;
     private int speed;
     private int energy;
 
-    public Creature(int x, int y, int speed, int energy) {
+    public Creature(int x, int y, int fur, int speed, int energy) {
         this.x = x;
         this.y = y;
+        this.fur = fur;
         this.speed = speed;
         this.energy = energy;
     }
@@ -22,6 +24,10 @@ public class Creature {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setFur(int fur) {
+        this.fur = fur;
     }
 
     public void setSpeed(int speed) {
@@ -38,6 +44,10 @@ public class Creature {
 
     public int getY() {
         return y;
+    }
+
+    public int getFur() {
+        return fur;
     }
 
     public int getSpeed() {

@@ -18,6 +18,8 @@ public class FoodGenerator {
         Random random = new Random();
         int mapWidth = map.getWidth();
         int mapHeight = map.getHeight();
+        // int mapWidth = 500;
+        // int mapHeight = 500;
 
         for (int i = 0; i < numberOfFoodItems; i++) {
             int x = random.nextInt(mapWidth);

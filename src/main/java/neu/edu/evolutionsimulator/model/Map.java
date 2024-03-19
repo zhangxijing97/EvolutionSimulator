@@ -88,6 +88,7 @@ public class Map {
     // }
     // }
     // }
+
     public void checkForFoodProximity(Creature creature, Map map) {
         int creatureX = creature.getX();
         int creatureY = creature.getY();
