@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Random;
 
 public class Creature {
+    private static int id = 0;
     private double x;
     private double y;
     private double furLength;
     private double speed;
     private double energy;
+    private List<Integer> ancestors;
 
     private long lastGenerationTime;
 
@@ -18,6 +20,7 @@ public class Creature {
         this.furLength = furLength;
         this.speed = speed;
         this.energy = energy;
+        this.lastGenerationTime = System.currentTimeMillis();
     }
 
     public void setX(double x) {
@@ -58,6 +61,14 @@ public class Creature {
 
     public double getEnergy() {
         return energy;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public List<Integer> getAncestors() {
+        return ancestors;
     }
 
     public long getLastGenerationTime() {
@@ -136,7 +147,7 @@ public class Creature {
         // Assuming the energy reduction is directly proportional to the difference in
         // fur length
         // You can adjust the formula as needed
-        double energyLoss = furDifference * 0.1; // Example formula
+        double energyLoss = furDifference * 0.3; // Example formula
 
         this.energy -= energyLoss;
 

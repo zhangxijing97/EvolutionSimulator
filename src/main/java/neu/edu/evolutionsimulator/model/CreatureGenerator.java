@@ -82,7 +82,7 @@ public class CreatureGenerator {
         double y = parent.getY();
 
         // Create the offspring creature with the derived attributes.
-        return new Creature(x, y, furLength, speed, energy);
+        return new Creature(x, y + 40, furLength, speed, energy);
     }
 
     private double generateAttributeValue(double mean, double stdDev) {
@@ -91,9 +91,9 @@ public class CreatureGenerator {
         return result;
     }
 
-    // Generate a random delay between 5 and 10 seconds (inclusive)
+    // Generate a random delay between 0 and 20 seconds (inclusive)
     private long getRandomDelay() {
-        return 0 + random.nextInt(1000) * 1000; // Random number between 5 and 10 (inclusive) multiplied by 1000 for
-                                                // milliseconds
+        return 0 + random.nextInt(500) * 1000; // Random number between 5 and 10 (inclusive) multiplied by 1000 for
+                                               // milliseconds
     }
 }
