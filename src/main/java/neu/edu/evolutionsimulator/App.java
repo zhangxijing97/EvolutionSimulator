@@ -1,11 +1,15 @@
 package neu.edu.evolutionsimulator;
 
 import javax.swing.JFrame;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
 
 import neu.edu.evolutionsimulator.model.Creature;
+import neu.edu.evolutionsimulator.model.CreatureGenerator;
 import neu.edu.evolutionsimulator.model.CreatureInitializer;
+import neu.edu.evolutionsimulator.model.Environment;
 import neu.edu.evolutionsimulator.model.FoodGenerator;
 import neu.edu.evolutionsimulator.model.Map;
 import neu.edu.evolutionsimulator.view.MapView;
@@ -25,6 +29,8 @@ public class App {
         MapController controller = new MapController(map);
         FoodGenerator foodGenerator = new FoodGenerator(map);
         CreatureInitializer creatureInitializer = new CreatureInitializer(map);
+        CreatureGenerator creatureGenerator = new CreatureGenerator(map);
+        Environment environment = new Environment(110);
 
         // Initialize the creatures
         List<Creature> creatures = creatureInitializer.initializeCreatures(30);
@@ -41,8 +47,6 @@ public class App {
         frame.setSize(screenWidth, screenHeight);
         frame.setVisible(true);
 
-        // foodGenerator.generateFood(100);
-
         // Game loop
         while (true) {
             // Update the view
@@ -50,16 +54,35 @@ public class App {
 
             // Generate Food
             foodGenerator.generateFood(1);
+            creatureGenerator.generateOffspring(creatures);
 
             // Move creatures
-            for (Creature creature : creatures) {
+            for (Creature creature : map.getCreatures()) {
                 creature.move(map.getFoods());
                 map.checkForFoodProximity(creature, map);
+                creature.updateEnergyBasedOnFur(environment);
+
+                // Check if the creature is dead and remove it from the map
+            }
+
+            // Create a list to store creatures to be removed
+            List<Creature> creaturesToRemove = new ArrayList<>();
+
+            // Iterate over the creatures and mark the dead ones for removal
+            for (Creature creature : map.getCreatures()) {
+                if (creature.isDead()) {
+                    creaturesToRemove.add(creature); // Mark for removal
+                }
+            }
+
+            // Remove the marked creatures from the map
+            for (Creature creature : creaturesToRemove) {
+                map.removeCreature(creature);
             }
 
             // Optional: Add a delay to control the speed of movement
             try {
-                Thread.sleep(10); // Adjust the delay time as needed
+                Thread.sleep(100); // Adjust the delay time as needed
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

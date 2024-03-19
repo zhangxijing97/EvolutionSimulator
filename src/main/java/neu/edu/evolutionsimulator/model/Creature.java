@@ -4,58 +4,64 @@ import java.util.List;
 import java.util.Random;
 
 public class Creature {
-    private int x;
-    private int y;
-    private int fur;
-    private int speed;
-    private int energy;
+    private double x;
+    private double y;
+    private double furLength;
+    private double speed;
+    private double energy;
 
-    public Creature(int x, int y, int fur, int speed, int energy) {
+    private long lastGenerationTime;
+
+    public Creature(double x, double y, double furLength, double speed, double energy) {
         this.x = x;
         this.y = y;
-        this.fur = fur;
+        this.furLength = furLength;
         this.speed = speed;
         this.energy = energy;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public void setFur(int fur) {
-        this.fur = fur;
+    public void setFurLength(double furLength) {
+        this.furLength = furLength;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
-    public void setEnergy(int energy) {
+    public void setEnergy(double energy) {
         this.energy = energy;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public int getFur() {
-        return fur;
+    public double getFurLength() {
+        return furLength;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public int getEnergy() {
+    public double getEnergy() {
         return energy;
+    }
+
+    public long getLastGenerationTime() {
+        return lastGenerationTime;
     }
 
     // Move to find the foods
@@ -73,20 +79,19 @@ public class Creature {
         }
     }
 
-    // Method to move randomly
     private void moveRandomly() {
         // Generate random direction
         Random random = new Random();
-        int directionX = random.nextInt(3) - 1; // -1, 0, or 1
-        int directionY = random.nextInt(3) - 1; // -1, 0, or 1
+        double directionX = random.nextDouble() * 2 - 1; // Generates a value between -1.0 and 1.0
+        double directionY = random.nextDouble() * 2 - 1; // Generates a value between -1.0 and 1.0
 
         // Update position based on speed and direction
         x += directionX * speed;
         y += directionY * speed;
 
         // Ensure the creature stays within the map bounds
-        x = Math.max(0, Math.min(x, 500 - 1));
-        y = Math.max(0, Math.min(y, 500 - 1));
+        // x = Math.max(0, Math.min(x, 2000 - 1));
+        // y = Math.max(0, Math.min(y, 1000 - 1));
     }
 
     // Method to find the nearest food item
@@ -106,10 +111,10 @@ public class Creature {
     }
 
     // Method to move towards a specific position
-    private void moveTo(int targetX, int targetY) {
+    private void moveTo(double targetX, double targetY) {
         // Calculate direction towards the target
-        int directionX = Integer.compare(targetX, x);
-        int directionY = Integer.compare(targetY, y);
+        double directionX = Double.compare(targetX, x);
+        double directionY = Double.compare(targetY, y);
 
         // Update position based on speed and direction
         x += directionX * speed;
@@ -117,10 +122,35 @@ public class Creature {
     }
 
     // Method to calculate distance to a specific position
-    private double calculateDistance(int targetX, int targetY) {
-        int dx = targetX - x;
-        int dy = targetY - y;
+    private double calculateDistance(double targetX, double targetY) {
+        double dx = targetX - x;
+        double dy = targetY - y;
         return Math.sqrt(dx * dx + dy * dy);
     }
 
+    // Method to update energy based on the environment's optimal fur length
+    public void updateEnergyBasedOnFur(Environment environment) {
+        double optimalFurLength = environment.getOptimalFurLength();
+        double furDifference = Math.abs(this.furLength - optimalFurLength);
+
+        // Assuming the energy reduction is directly proportional to the difference in
+        // fur length
+        // You can adjust the formula as needed
+        double energyLoss = furDifference * 0.05; // Example formula
+
+        this.energy -= energyLoss;
+
+        // Ensure energy does not fall below 0
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+    }
+
+    public boolean isDead() {
+        return energy <= 0;
+    }
+
+    public void setLastGenerationTime(long lastGenerationTime) {
+        this.lastGenerationTime = lastGenerationTime;
+    }
 }

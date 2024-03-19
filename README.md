@@ -11,7 +11,7 @@ Evolution Simulator is a simple simulation program where creatures evolve over t
 
 ## Screenshot
 
-![Screenshot](image/Screenshot03.png)
+![Screenshot](image/Screenshot04.png)
 
 ### Prerequisites
 
