@@ -54,7 +54,7 @@ public class App {
 
             // Generate Food
             foodGenerator.generateFood(1);
-            creatureGenerator.generateOffspring(creatures);
+            // creatureGenerator.generateOffspring(creatures);
 
             // Move creatures
             for (Creature creature : map.getCreatures()) {
@@ -64,6 +64,15 @@ public class App {
 
                 // Check if the creature is dead and remove it from the map
             }
+
+            // Create a list to store creatures generateOffspring
+            List<Creature> creaturesToGenerateOffspring = new ArrayList<>();
+            for (Creature creature : map.getCreatures()) {
+                creaturesToGenerateOffspring.add(creature);
+            }
+
+            // Generate Offspring
+            creatureGenerator.generateOffspring(creaturesToGenerateOffspring);
 
             // Create a list to store creatures to be removed
             List<Creature> creaturesToRemove = new ArrayList<>();

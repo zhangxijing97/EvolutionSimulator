@@ -136,7 +136,7 @@ public class Creature {
         // Assuming the energy reduction is directly proportional to the difference in
         // fur length
         // You can adjust the formula as needed
-        double energyLoss = furDifference * 0.05; // Example formula
+        double energyLoss = furDifference * 0.1; // Example formula
 
         this.energy -= energyLoss;
 

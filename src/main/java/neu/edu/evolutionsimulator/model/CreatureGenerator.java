@@ -41,6 +41,30 @@ public class CreatureGenerator {
         return offspring;
     }
 
+    public void generateOffspring(Creature parent) {
+        // List<Creature> offspring = new ArrayList<>();
+
+        // for (Creature parent : creatures) {
+        // Calculate the time elapsed since the last generation for this creature
+        long currentTime = System.currentTimeMillis();
+        long elapsedTime = currentTime - parent.getLastGenerationTime();
+
+        // Check if enough time has passed for a new generation for this creature
+        if (elapsedTime >= getRandomDelay()) {
+            // Assume each creature has a chance to produce offspring at this moment
+            if (random.nextBoolean()) { // Simplified logic, adjust the probability as needed
+                Creature child = createOffspring(parent);
+                map.addCreature(child);
+                // offspring.add(child);
+            }
+            // Update the last generation time for this creature
+            parent.setLastGenerationTime(currentTime);
+        }
+        // }
+
+        // return offspring;
+    }
+
     private Creature createOffspring(Creature parent) {
         // Generate attributes for the offspring based on the parent's attributes.
         // Here, we're using a normal distribution centered at the parent's attribute
