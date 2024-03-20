@@ -1,6 +1,8 @@
 package neu.edu.evolutionsimulator;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ public class App {
         Environment environment = new Environment(110);
 
         // Initialize the creatures
-        List<Creature> creatures = creatureInitializer.initializeCreatures(30);
+        List<Creature> creatures = creatureInitializer.initializeCreatures();
         for (Creature creature : creatures) {
             map.addCreature(creature);
         }
@@ -46,6 +48,32 @@ public class App {
         // Set frame size to match screen size
         frame.setSize(screenWidth, screenHeight);
         frame.setVisible(true);
+
+        // (temp : Set setting screen for task4)
+        final JFrame settingFrame = new JFrame("Setting");
+        settingFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
+        settingFrame.setSize(300, 400);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Set slider for Number of Initial Creatures : Task4
+        CreatureInitializer ci = new CreatureInitializer(map);
+        JSlider creatureSlider = ci.initializeCreaturesGUI();
+        /* Needs to be added later
+        creatureSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvnet e) {
+            }
+            int newCreatureCount = creatureSlider.getValue();
+            initializeSimulation(newCreatureCount);
+            });        
+         */
+        panel.add(creatureSlider);
+
+        // (temp : Set setting screen for task4)
+        settingFrame.add(panel);
+        settingFrame.pack(); // Adjust window size based on its contents
+        settingFrame.setVisible(true);
 
         // Game loop
         while (true) {
