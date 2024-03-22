@@ -1,15 +1,28 @@
 package neu.edu.evolutionsimulator.model;
 
 import java.util.Random;
+
+import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.util.List;
 import neu.edu.evolutionsimulator.model.Food;
 import neu.edu.evolutionsimulator.model.Map;
 
 public class FoodGenerator {
     private Map map;
+    private int maxFoodItems;
 
     public FoodGenerator(Map map) {
         this.map = map;
+        this.maxFoodItems = 50; // Default value
+    }
+
+    public void setMaxFoodItems(int maxFoodItems) {
+        this.maxFoodItems = maxFoodItems;
     }
 
     // Method to generate food items
@@ -29,5 +42,26 @@ public class FoodGenerator {
             map.addFood(food);
         }
 
+    }
+
+    // Initializes a GUI slider to control the maximum number of food items 
+    public JSlider initializeFoodItemsGUI() {
+        JSlider foodItemsSlider = new JSlider(0, 100, maxFoodItems);
+        foodItemsSlider.setMajorTickSpacing(10);
+        foodItemsSlider.setPaintTicks(true);
+        foodItemsSlider.setPaintLabels(true);
+        foodItemsSlider.setBorder(BorderFactory.createTitledBorder("Max Number of Food Items"));
+
+        foodItemsSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JSlider source = (JSlider) e.getSource();
+                if (!source.getValueIsAdjusting()) {
+                    setMaxFoodItems(source.getValue());
+                }
+            }
+        });
+
+        return foodItemsSlider;
     }
 }

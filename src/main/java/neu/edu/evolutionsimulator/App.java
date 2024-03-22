@@ -70,6 +70,12 @@ public class App {
          */
         panel.add(creatureSlider);
 
+
+
+        // Slider for Maximum Number of Food Items
+        JSlider foodSlider = foodGenerator.initializeFoodItemsGUI();
+        panel.add(foodSlider);
+
         // (temp : Set setting screen for task4)
         settingFrame.add(panel);
         settingFrame.pack(); // Adjust window size based on its contents
