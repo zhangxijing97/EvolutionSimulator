@@ -76,6 +76,10 @@ public class App {
         JSlider foodSlider = foodGenerator.initializeFoodItemsGUI();
         panel.add(foodSlider);
 
+        // Slider for Generation Timing
+        JSlider genTimeSlider = creatureGenerator.initializeGeneratorGUI();
+        panel.add(genTimeSlider);
+
         // (temp : Set setting screen for task4)
         settingFrame.add(panel);
         settingFrame.pack(); // Adjust window size based on its contents
