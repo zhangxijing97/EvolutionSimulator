@@ -1,4 +1,6 @@
 package neu.edu.evolutionsimulator.model;
+import java.util.Hashtable;
+
 
 import java.util.Random;
 
