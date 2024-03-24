@@ -76,6 +76,9 @@ public class App {
         JSlider foodSlider = foodGenerator.initializeFoodItemsGUI();
         panel.add(foodSlider);
 
+        JSlider generationSpeedSlider = foodGenerator.initializeGenerationIntervalGUI();
+        panel.add(generationSpeedSlider);
+
         // Slider for Generation Timing
         JSlider genTimeSlider = creatureGenerator.initializeGeneratorGUI();
         panel.add(genTimeSlider);
