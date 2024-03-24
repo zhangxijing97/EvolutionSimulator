@@ -1,4 +1,6 @@
 package neu.edu.evolutionsimulator;
+import java.util.Hashtable;
+
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
