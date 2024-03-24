@@ -49,6 +49,14 @@ public class FoodGenerator {
 
     }
 
+    // Method to set the generation interval for the food generation timer
+    public void setGenerationInterval(int interval) {
+        if (generationTimer != null) {
+            generationTimer.setDelay(interval);
+        }
+    }
+
+
     // Initializes a GUI slider to control the maximum number of food items 
     public JSlider initializeFoodItemsGUI() {
         JSlider foodItemsSlider = new JSlider(0, 100, maxFoodItems);
