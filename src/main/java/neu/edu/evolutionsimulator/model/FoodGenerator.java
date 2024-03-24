@@ -15,10 +15,15 @@ import neu.edu.evolutionsimulator.model.Map;
 public class FoodGenerator {
     private Map map;
     private int maxFoodItems;
+    private Timer generationTimer;
 
     public FoodGenerator(Map map) {
         this.map = map;
         this.maxFoodItems = 50; // Default value
+
+        // Initialize the timer with some default interval and action
+        this.generationTimer = new Timer(1000, e -> generateFood(this.maxFoodItems)); // Example: Generate food every second based on maxFoodItems
+        this.generationTimer.start(); // Start the timer to generate food
     }
 
     public void setMaxFoodItems(int maxFoodItems) {
@@ -63,5 +68,32 @@ public class FoodGenerator {
         });
 
         return foodItemsSlider;
+    }
+
+    public JSlider initializeGenerationIntervalGUI() {
+        JSlider generationIntervalSlider = new JSlider(100, 5000, generationTimer.getDelay());
+        generationIntervalSlider.setMajorTickSpacing(1000);
+        generationIntervalSlider.setMinorTickSpacing(500);
+        generationIntervalSlider.setPaintTicks(true);
+        generationIntervalSlider.setPaintLabels(true);
+        generationIntervalSlider.setBorder(BorderFactory.createTitledBorder("Generation Interval (ms)"));
+
+        Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
+        labelTable.put(100, new JLabel("100"));
+        labelTable.put(2500, new JLabel("2500")); 
+        labelTable.put(5000, new JLabel("5000"));
+        generationIntervalSlider.setLabelTable(labelTable); 
+    
+        generationIntervalSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JSlider source = (JSlider) e.getSource();
+                if (!source.getValueIsAdjusting()) {
+                    setGenerationInterval(source.getValue());
+                }
+            }
+        });
+    
+        return generationIntervalSlider;
     }
 }
