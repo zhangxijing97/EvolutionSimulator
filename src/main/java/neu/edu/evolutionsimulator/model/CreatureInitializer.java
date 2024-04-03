@@ -23,7 +23,7 @@ public class CreatureInitializer {
             int x = random.nextInt(mapWidth);
             int y = random.nextInt(mapHeight);
             List<Integer> emptyList = new ArrayList<>();
-            Creature creature = new Creature(x, y, 100, 1, 100, emptyList); // Assuming speed is 1
+            Creature creature = new Creature(x, y, 100, true, emptyList, 1); // Assuming speed is 1
             creatures.add(creature);
         }
 

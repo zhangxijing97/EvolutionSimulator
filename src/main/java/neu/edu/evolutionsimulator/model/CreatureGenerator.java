@@ -85,7 +85,7 @@ public class CreatureGenerator {
         List<Integer> ancestors = parent.getAncestors();
 
         // Create the offspring creature with the derived attributes.
-        return new Creature(x, y + 40, furLength, speed, energy, ancestors);
+        return new Creature(x, y + 40, furLength, true, ancestors, 1);
     }
 
     private double generateAttributeValue(double mean, double stdDev) {

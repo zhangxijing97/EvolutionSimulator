@@ -9,7 +9,6 @@ public class Map {
     private int width;
     private int height;
     private List<Creature> creatures;
-    private List<Food> foods;
 
     public int getWidth() {
         return width;
@@ -31,7 +30,6 @@ public class Map {
         this.width = width;
         this.height = height;
         this.creatures = new ArrayList<>();
-        this.foods = new ArrayList<>();
     }
 
     // Add Creature
@@ -49,21 +47,6 @@ public class Map {
         return creatures;
     }
 
-    // Add Food
-    public void addFood(Food food) {
-        foods.add(food);
-    }
-
-    // Remove Food
-    public void removeFood(Food food) {
-        foods.remove(food);
-    }
-
-    // Get Food
-    public List<Food> getFoods() {
-        return foods;
-    }
-
     public void checkForFoodProximity(Creature creature, Map map) {
         // int creatureX = creature.getX();
         // int creatureY = creature.getY();
@@ -71,27 +54,6 @@ public class Map {
         int creatureX = (int) Math.round(creature.getX());
         int creatureY = (int) Math.round(creature.getY());
 
-        // Get the list of food items
-        List<Food> foods = map.getFoods();
-
-        // Iterate through the food items
-        Iterator<Food> iterator = foods.iterator();
-        while (iterator.hasNext()) {
-            Food food = iterator.next();
-            int foodX = food.getX();
-            int foodY = food.getY();
-
-            // Calculate the distance between creature and food using Euclidean distance
-            double distance = Point2D.distance(creatureX, creatureY, foodX, foodY);
-
-            // Check if the distance is less than 5 units
-            if (distance < 5) {
-                // Remove the food item
-                iterator.remove();
-                // You can also update the creature's energy here if needed
-                creature.setEnergy(creature.getEnergy() + food.getEnergy());
-            }
-        }
     }
 
 }

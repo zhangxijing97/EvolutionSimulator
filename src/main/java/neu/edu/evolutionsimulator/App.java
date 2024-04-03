@@ -10,9 +10,9 @@ import neu.edu.evolutionsimulator.model.Creature;
 import neu.edu.evolutionsimulator.model.CreatureGenerator;
 import neu.edu.evolutionsimulator.model.CreatureInitializer;
 import neu.edu.evolutionsimulator.model.Environment;
-import neu.edu.evolutionsimulator.model.FoodGenerator;
 import neu.edu.evolutionsimulator.model.Map;
 import neu.edu.evolutionsimulator.view.MapView;
+import neu.edu.evolutionsimulator.view.StartView;
 import neu.edu.evolutionsimulator.controller.MapController;
 
 public class App {
@@ -25,9 +25,10 @@ public class App {
 
         // Set map to match screen size
         Map map = new Map(screenWidth, screenHeight);
+
+        // Create and add mapView to the frame
         MapView mapView = new MapView(map);
         MapController controller = new MapController(map);
-        FoodGenerator foodGenerator = new FoodGenerator(map);
         CreatureInitializer creatureInitializer = new CreatureInitializer(map);
         CreatureGenerator creatureGenerator = new CreatureGenerator(map);
         Environment environment = new Environment(110);
@@ -38,9 +39,13 @@ public class App {
             map.addCreature(creature);
         }
 
+        // Testing
+        StartView startView = new StartView();
+
         JFrame frame = new JFrame("Evolution Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(mapView);
+        // frame.add(startView);
         frame.addKeyListener(controller);
 
         // Set frame size to match screen size
@@ -52,15 +57,13 @@ public class App {
             // Update the view
             mapView.repaint();
 
-            // Generate Food
-            foodGenerator.generateFood(1);
-            // creatureGenerator.generateOffspring(creatures);
-
             // Move creatures
             for (Creature creature : map.getCreatures()) {
-                creature.move(map.getFoods());
+                creature.move();
                 map.checkForFoodProximity(creature, map);
-                creature.updateEnergyBasedOnFur(environment);
+                // creature.updateEnergyBasedOnFur(environment);
+                creature.updateSurvivalRate(environment);
+                creature.determineSurvival();
 
                 // Check if the creature is dead and remove it from the map
             }
