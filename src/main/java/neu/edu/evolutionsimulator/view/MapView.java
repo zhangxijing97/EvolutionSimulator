@@ -2,7 +2,6 @@ package neu.edu.evolutionsimulator.view;
 
 import neu.edu.evolutionsimulator.model.Map;
 import neu.edu.evolutionsimulator.model.Creature;
-import neu.edu.evolutionsimulator.model.Food;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,20 +21,12 @@ public class MapView extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Render foods
-        g.setColor(Color.GREEN);
-        List<Food> foods = map.getFoods();
-        for (Food food : foods) {
-            g.fillOval(food.getX(), food.getY(), 5, 5); // Assuming creature is represented by a circle
-        }
-
         // Render creatures
         g.setColor(Color.BLUE);
         List<Creature> creatures = map.getCreatures();
         for (Creature creature : creatures) {
             int creatureX = (int) Math.round(creature.getX());
             int creatureY = (int) Math.round(creature.getY());
-            double energy = creature.getEnergy();
             double furLength = creature.getFurLength();
 
             // Render creature as a circle
@@ -45,7 +36,7 @@ public class MapView extends JPanel {
             g.setColor(Color.WHITE); // Set color for text
             g.drawString("ID: " + creature.getId(), creatureX + 15, creatureY - 20);
             g.drawString("Ancestors: " + creature.getAncestorsAsString(), creatureX + 15, creatureY - 0);
-            g.drawString("Energy: " + energy, creatureX + 15, creatureY + 20);
+            g.drawString("survivalRate: " + creature.getSurvivalRate(), creatureX + 15, creatureY + 20);
             g.drawString("furLength: " + furLength, creatureX + 15, creatureY + 40);
             g.setColor(Color.BLUE); // Reset color back to creature color
         }
