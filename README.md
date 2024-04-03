@@ -6,8 +6,6 @@ Evolution Simulator is a simple simulation program where creatures evolve over t
 
 - Creatures move randomly within the map.
 - Food items are randomly generated on the map.
-- Creatures can consume food items to gain energy.
-- Creatures try to find the nearest food item and move towards it.
 
 ## Screenshot
 
