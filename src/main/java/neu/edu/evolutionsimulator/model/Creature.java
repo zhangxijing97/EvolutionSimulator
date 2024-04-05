@@ -87,6 +87,22 @@ public class Creature {
         sb.append("]");
         return sb.toString();
     }
+    
+    public String getShortAncestorsAsString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        int startIndex = Math.max(0, ancestors.size() - 4);
+
+        for (int i = startIndex; i < ancestors.size(); i++) {
+            sb.append(ancestors.get(i));
+            if (i < ancestors.size() -1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 
     public long getLastGenerationTime() {
         return lastGenerationTime;
@@ -112,8 +128,8 @@ public class Creature {
         y += directionY * 1;
 
         // Ensure the creature stays within the map bounds
-        // x = Math.max(0, Math.min(x, 2000 - 1));
-        // y = Math.max(0, Math.min(y, 1000 - 1));
+        x = Math.max(0, Math.min(x, 2000 - 1));
+        y = Math.max(0, Math.min(y, 1000 - 1));
     }
 
     // Method to move towards a specific position

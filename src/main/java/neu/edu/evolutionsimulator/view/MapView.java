@@ -44,7 +44,7 @@ public class MapView extends JPanel {
             // Display energy value next to the creature
             g.setColor(Color.WHITE); // Set color for text
             g.drawString("ID: " + creature.getId(), creatureX + 15, creatureY - 20);
-            g.drawString("Ancestors: " + creature.getAncestorsAsString(), creatureX + 15, creatureY - 0);
+            g.drawString("Ancestors: " + creature.getShortAncestorsAsString(), creatureX + 15, creatureY - 0);
             g.drawString(String.format("survivalRate: %.2f%%", survivalRate*100), creatureX + 15, creatureY + 20);
             g.drawString(String.format("furLength: %.2f", furLength), creatureX + 15, creatureY + 40);
         }
