@@ -22,12 +22,21 @@ public class MapView extends JPanel {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // Render creatures
-        g.setColor(Color.BLUE);
         List<Creature> creatures = map.getCreatures();
         for (Creature creature : creatures) {
             int creatureX = (int) Math.round(creature.getX());
             int creatureY = (int) Math.round(creature.getY());
             double furLength = creature.getFurLength();
+            double survivalRate = creature.getSurvivalRate();
+
+            // Set color for creature
+            if (furLength < 100) {
+                g.setColor(Color.YELLOW);
+            } else if (furLength >= 100 && furLength < 105) {
+                g.setColor(Color.GREEN);
+            } else {
+                g.setColor(Color.RED);
+            }
 
             // Render creature as a circle
             g.fillOval(creatureX, creatureY, 10, 10);
@@ -36,9 +45,8 @@ public class MapView extends JPanel {
             g.setColor(Color.WHITE); // Set color for text
             g.drawString("ID: " + creature.getId(), creatureX + 15, creatureY - 20);
             g.drawString("Ancestors: " + creature.getAncestorsAsString(), creatureX + 15, creatureY - 0);
-            g.drawString("survivalRate: " + creature.getSurvivalRate(), creatureX + 15, creatureY + 20);
-            g.drawString("furLength: " + furLength, creatureX + 15, creatureY + 40);
-            g.setColor(Color.BLUE); // Reset color back to creature color
+            g.drawString(String.format("survivalRate: %.2f%%", survivalRate*100), creatureX + 15, creatureY + 20);
+            g.drawString(String.format("furLength: %.2f", furLength), creatureX + 15, creatureY + 40);
         }
 
         // Calculate the mean of furLength
