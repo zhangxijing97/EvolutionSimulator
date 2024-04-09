@@ -38,14 +38,18 @@ public class MapView extends JPanel {
                 g.setColor(Color.RED);
             }
 
+            // Set length and width for creature
+            // Calculate radius based on furLength
+            int radius = (int) Math.round(furLength / 10);
+
             // Render creature as a circle
-            g.fillOval(creatureX, creatureY, 10, 10);
+            g.fillOval(creatureX - radius, creatureY - radius, 2 * radius, 2 * radius);
 
             // Display energy value next to the creature
             g.setColor(Color.WHITE); // Set color for text
             g.drawString("ID: " + creature.getId(), creatureX + 15, creatureY - 20);
             g.drawString("Ancestors: " + creature.getShortAncestorsAsString(), creatureX + 15, creatureY - 0);
-            g.drawString(String.format("survivalRate: %.2f%%", survivalRate*100), creatureX + 15, creatureY + 20);
+            g.drawString(String.format("survivalRate: %.2f%%", survivalRate * 100), creatureX + 15, creatureY + 20);
             g.drawString(String.format("furLength: %.2f", furLength), creatureX + 15, creatureY + 40);
         }
 
