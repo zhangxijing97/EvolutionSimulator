@@ -45,6 +45,9 @@ public class MapView extends JPanel {
             // Render creature as a circle
             g.fillOval(creatureX - radius, creatureY - radius, 2 * radius, 2 * radius);
 
+            g.setColor(Color.BLUE);
+            g.fillOval(creatureX - 5, creatureY - 5, 10, 10);
+
             // Display energy value next to the creature
             g.setColor(Color.WHITE); // Set color for text
             g.drawString("ID: " + creature.getId(), creatureX + 15, creatureY - 20);
