@@ -17,6 +17,8 @@ public class CreatureInitializer {
         int mapWidth = map.getWidth();
         int mapHeight = map.getHeight();
 
+
+        
         List<Creature> creatures = new ArrayList<>();
 
         for (int i = 0; i < numberOfCreatures; i++) {
@@ -29,4 +31,18 @@ public class CreatureInitializer {
 
         return creatures;
     }
+    
+    public void reinitializeCreatures(int numberOfCreatures) {
+        // Clear existing creatures from the map
+        this.map.clearCreatures();  // Make sure your Map class has the clearCreatures method
+
+        // Initialize new creatures
+        List<Creature> newCreatures = initializeCreatures(numberOfCreatures);
+        for (Creature creature : newCreatures) {
+            this.map.addCreature(creature);
+        }
+    }
+
+
+
 }

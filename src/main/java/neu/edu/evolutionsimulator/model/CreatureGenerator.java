@@ -99,4 +99,24 @@ public class CreatureGenerator {
         return 0 + random.nextInt(500) * 1000; // Random number between 5 and 10 (inclusive) multiplied by 1000 for
                                                // milliseconds
     }
+
+    
+    public List<Creature> generateCreatures() {
+        List<Creature> creatures = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            double x = random.nextDouble() * 1000;
+            double y = random.nextDouble() * 1000;
+            // 生成随机的毛发长度，这里我们设置一个范围，比如 5 到 15
+            double furLength = 5 + random.nextDouble() * 10;
+            boolean isAlive = random.nextBoolean(); // 假设这代表生物初始时是活着的状态
+            List<Integer> ancestors = new ArrayList<>(); // 初始祖先列表
+            double survivalRate = random.nextDouble(); // 给生物一个随机的生存率，范围从 0.0 到 1.0
+    
+            creatures.add(new Creature(x, y, furLength, isAlive, ancestors, survivalRate));
+        }
+        return creatures;
+    }
+    
+
 }

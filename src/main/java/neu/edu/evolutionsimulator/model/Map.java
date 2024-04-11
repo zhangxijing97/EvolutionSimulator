@@ -32,6 +32,8 @@ public class Map {
         this.creatures = new ArrayList<>();
     }
 
+
+
     // Add Creature
     public void addCreature(Creature creature) {
         creatures.add(creature);
@@ -46,6 +48,12 @@ public class Map {
     public List<Creature> getCreatures() {
         return creatures;
     }
+
+    public void clearCreatures() {
+        creatures.clear();
+    }
+
+
 
     public void checkForFoodProximity(Creature creature, Map map) {
         // int creatureX = creature.getX();
