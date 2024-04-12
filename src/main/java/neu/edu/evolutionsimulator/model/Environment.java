@@ -16,4 +16,14 @@ public class Environment {
     public void setOptimalFurLength(double optimalFurLength) {
         this.optimalFurLength = optimalFurLength;
     }
+
+    public double getTemperature() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTemperature'");
+    }
+
+    public Object setTemperature(int value) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setTemperature'");
+    }
 }

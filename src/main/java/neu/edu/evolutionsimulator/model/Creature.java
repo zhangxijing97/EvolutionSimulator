@@ -163,6 +163,7 @@ public class Creature {
 
     public void updateSurvivalRate(Environment environment) {
         double optimalFurLength = environment.getOptimalFurLength();
+        double temperature = environment.getTemperature();
         double furDifference = Math.abs(this.furLength - optimalFurLength);
 
         // Example formula to adjust survival rate based on fur difference.
@@ -176,9 +177,22 @@ public class Creature {
 
         // Calculate survival rate - linear decrease from 1 to 0.
         this.survivalRate = 1.0 - (furDifference / maxTolerableDifference);
-
+        double temperatureImpact = calculateTemperatureImpact(temperature);
+        this.survivalRate *= temperatureImpact; 
         // Ensure survival rate is not less than 0.
         this.survivalRate = Math.max(0.0, this.survivalRate);
+    }
+
+    // method for calculating temperature effects
+    private double calculateTemperatureImpact(double temperature) {
+        if (temperature < 10) {
+            return (furLength > 50) ? 1.1 : 0.9;
+        } else if (temperature >= 10 && temperature < 20) {
+            return (furLength > 50) ? 1.05 : 0.95;
+        } else if (temperature >= 20) {
+            return (furLength > 50) ? 0.85 : 1.15;
+        }
+        return 1.0;
     }
 
     public void determineSurvival() {

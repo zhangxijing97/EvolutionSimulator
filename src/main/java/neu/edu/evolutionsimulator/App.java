@@ -9,12 +9,6 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 
 import neu.edu.evolutionsimulator.model.Creature;
 import neu.edu.evolutionsimulator.model.CreatureGenerator;
@@ -103,6 +97,14 @@ public class App {
             }
         });
         controlPanel.add(generateButton);
+
+        //temp buttom
+        JSlider temperatureSlider = new JSlider(JSlider.HORIZONTAL, 0, 40, 20);  // 假设温度范围是0到40，默认20
+        temperatureSlider.setMajorTickSpacing(10);
+        temperatureSlider.setPaintTicks(true);
+        temperatureSlider.setPaintLabels(true);
+        temperatureSlider.addChangeListener(e -> environment.setTemperature(temperatureSlider.getValue()));  // 更新环境温度
+        controlPanel.add(temperatureSlider);
 
         // 创建按钮并添加到buttonPanel
         JButton startButton = new JButton("Start");
