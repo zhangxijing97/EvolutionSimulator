@@ -1,29 +1,38 @@
 package neu.edu.evolutionsimulator.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Environment {
     private double optimalFurLength; // Optimal fur length for the environment
+    private List<Creature> creatures; // Ensure this list is never null
 
     public Environment(double optimalFurLength) {
         this.optimalFurLength = optimalFurLength;
+        this.creatures = new ArrayList<>(); // Initialize the list here
     }
 
     public double getOptimalFurLength() {
         return optimalFurLength;
     }
 
-    // Setter method if you want to allow changing the optimal fur length
-    // dynamically
     public void setOptimalFurLength(double optimalFurLength) {
         this.optimalFurLength = optimalFurLength;
     }
 
-    public double getTemperature() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTemperature'");
+    public List<Creature> getCreatures() {
+        return creatures;
     }
 
-    public Object setTemperature(int value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setTemperature'");
+    public void setCreatures(List<Creature> creatures) {
+        this.creatures = creatures;
     }
+
+    public double calculateAverageFurLength() {
+        if (creatures.isEmpty())
+            return 0;
+        double totalFurLength = creatures.stream().mapToDouble(Creature::getFurLength).sum();
+        return totalFurLength / creatures.size();
+    }
+
 }

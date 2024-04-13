@@ -9,7 +9,6 @@ public class Map {
     private int width;
     private int height;
     private List<Creature> creatures;
-    private double temperature; 
 
     public int getWidth() {
         return width;
@@ -25,14 +24,6 @@ public class Map {
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public double getTemperature() {
-        return temperature;
     }
 
     public Map(int width, int height) {

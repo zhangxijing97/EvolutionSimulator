@@ -9,32 +9,20 @@ import java.util.List;
 
 public class MapView extends JPanel {
     private Map map;
-    private JSlider temperatureSlider;
-    private JButton generateCreatureButton;
 
     public MapView(Map map) {
         this.map = map;
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        // 设定滑块最小值0，最大值3，初始值1，代表四种温度设置
-        temperatureSlider = new JSlider(JSlider.HORIZONTAL, 0, 3, 1);
-        temperatureSlider.setMajorTickSpacing(1);
-        temperatureSlider.setPaintTicks(true);
-        temperatureSlider.setPaintLabels(true);
-        temperatureSlider.setLabelTable(temperatureSlider.createStandardLabels(1)); // 每个点一个标签
-        temperatureSlider.addChangeListener(e -> map.setTemperature(temperatureSlider.getValue() * 10)); // 每一步代表10°C
-        add(temperatureSlider, BorderLayout.SOUTH);
-
-        setAlignmentX(Component.LEFT_ALIGNMENT);
     }
-
-        
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Render map
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getWidth(), getHeight());
+
+        setOpaque(false);
+
+        // // Render map
+        // g.setColor(Color.BLACK);
+        // g.fillRect(0, 0, getWidth(), getHeight());
 
         // Render creatures
         List<Creature> creatures = map.getCreatures();
