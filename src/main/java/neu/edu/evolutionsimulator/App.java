@@ -36,7 +36,7 @@ public class App {
         creatureGenerator = new CreatureGenerator(map);
         creatureInitializer = new CreatureInitializer(map);
         environment = new Environment(110);
-        SwingUtilities.invokeLater(App::createAndShowGUI);
+        // SwingUtilities.invokeLater(App::createAndShowGUI);
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
