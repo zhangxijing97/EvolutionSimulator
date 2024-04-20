@@ -7,8 +7,8 @@ public class Environment {
     private double optimalFurLength; // Optimal fur length for the environment
     private List<Creature> creatures; // Ensure this list is never null
 
-    public Environment(double optimalFurLength) {
-        this.optimalFurLength = optimalFurLength;
+    public Environment(double temperature) {
+        this.optimalFurLength = calculateOptimalFurLength(temperature);
         this.creatures = new ArrayList<>(); // Initialize the list here
     }
 
@@ -18,6 +18,10 @@ public class Environment {
 
     public void setOptimalFurLength(double optimalFurLength) {
         this.optimalFurLength = optimalFurLength;
+    }
+
+    public double calculateOptimalFurLength(double temperature) {
+        return 100 - temperature;
     }
 
     public List<Creature> getCreatures() {

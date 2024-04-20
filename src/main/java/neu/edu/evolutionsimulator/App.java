@@ -28,14 +28,21 @@ public class App {
     private static CreatureInitializer creatureInitializer;
 
     private static Environment environment;
+    private static double optimalFurLength;
+    private static double temperature;
     private static Timer simulationTimer;
     private static boolean simulationRunning = false;
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private static int screenWidth = (int) screenSize.getWidth();
+    private static int screenHeight = (int) screenSize.getHeight();
 
     public static void main(String[] args) {
-        map = new Map(1000, 1000);
+        map = new Map(screenWidth-400, screenHeight-200);
         creatureGenerator = new CreatureGenerator(map);
         creatureInitializer = new CreatureInitializer(map);
-        environment = new Environment(110);
+        temperature = 0;
+        environment = new Environment(temperature);
+        optimalFurLength = environment.calculateOptimalFurLength(temperature);
         SwingUtilities.invokeLater(App::createAndShowGUI);
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -46,19 +53,12 @@ public class App {
     }
 
     private static void createAndShowGUI() {
-
-        // Get screen size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-
         // Set map to match screen size
-
         mapView = new MapView(map);
         mapView.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
         // Initialize the creatures
-        List<Creature> creatures = creatureInitializer.initializeCreatures(30);
+        List<Creature> creatures = creatureInitializer.initializeCreatures(20);
         for (Creature creature : creatures) {
             map.addCreature(creature);
         }
@@ -87,6 +87,7 @@ public class App {
                 mapView.repaint();
             }
         });
+        
         controlPanel.add(initializeButton);
 
         JButton generateButton = new JButton("Generate Creatures");
@@ -103,11 +104,9 @@ public class App {
         });
         controlPanel.add(generateButton);
 
-        // 创建按钮并添加到buttonPanel
         JButton startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 startSimulation();
             }
         });
@@ -216,7 +215,7 @@ public class App {
     private static JSlider temperatureSlider;
 
     public static void setupTemperatureSlider(JFrame frame) {
-        temperatureSlider = new JSlider(JSlider.HORIZONTAL, -10, 20, 0);
+        temperatureSlider = new JSlider(JSlider.HORIZONTAL, -10, 30, 0);
         temperatureSlider.setMajorTickSpacing(10);
         temperatureSlider.setPaintTicks(true);
         temperatureSlider.setPaintLabels(true);
@@ -234,30 +233,29 @@ public class App {
                 int temperature = temperatureSlider.getValue();
                 System.out.println("Temperature slider adjusted to: " + temperature);
                 updateInterfaceColor(temperature);
-                frame.repaint(); // Ensure that this call to repaint is happening.
+
+                optimalFurLength = environment.calculateOptimalFurLength(temperature);
+                environment.setOptimalFurLength(optimalFurLength);
+
+                updateSimulation();
+
+                frame.repaint();
             }
         });
     }
 
     private static void updateInterfaceColor(int temperature) {
         Color color;
-        switch (temperature) {
-            case -10:
-                color = new Color(0, 0, 139); // Deep Blue
-                break;
-            case 0:
-                color = new Color(173, 216, 230); // Light Blue
-                break;
-            case 10:
-                color = new Color(255, 182, 193); // Light Red
-                break;
-            case 20:
-                color = new Color(139, 0, 0); // Deep Red
-                break;
-            default:
-                color = Color.gray; // Fallback color
-                break;
+        if (temperature < 0) {
+            color = new Color(98, 164, 199); // Deep Blue
+        } else if (temperature < 10) {
+            color = new Color(153, 194, 223); // Light Blue
+        } else if (temperature < 20) {
+            color = new Color(247, 168, 168); // Light Red
+        } else {
+            color = new Color(194, 112, 112); // Deep Red
         }
+
         // Assume the background you want to change is the frame's content pane
         frame.getContentPane().setBackground(color);
     }

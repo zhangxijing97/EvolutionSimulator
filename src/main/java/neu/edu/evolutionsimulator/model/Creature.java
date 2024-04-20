@@ -208,10 +208,10 @@ public class Creature {
     }
 
     public void adjustSurvivalRate(int temperature, Environment environment) {
-        double currentAverageFurLength = environment.calculateAverageFurLength();
+        double currentOptimalFurLength = environment.calculateOptimalFurLength(temperature);
         double adjustmentFactor = 1.0;
-        if ((temperature < 0 && this.furLength > currentAverageFurLength) ||
-                (temperature >= 10 && this.furLength < currentAverageFurLength)) {
+        if ((currentOptimalFurLength - this.furLength > -10)
+            && (currentOptimalFurLength - this.furLength < 10)) {
             adjustmentFactor = 1.025; // Increase survival rate by 10%
         }
         this.survivalRate *= adjustmentFactor;

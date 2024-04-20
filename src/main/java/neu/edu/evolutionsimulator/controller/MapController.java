@@ -14,7 +14,6 @@ public class MapController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // Handle key presses to move creatures, etc.
         System.out.println("A key was pressed.");
     }
 
