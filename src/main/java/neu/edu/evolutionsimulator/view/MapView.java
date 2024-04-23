@@ -49,10 +49,10 @@ public class MapView extends JPanel {
 
             // Display energy value next to the creature
             g.setColor(Color.BLACK); // Set color for text
-            g.drawString("ID: " + creature.getId(), creatureX-15, creatureY + 30);
-            g.drawString("Ancestors: " + creature.getShortAncestorsAsString(), creatureX -15, creatureY +45);
+            g.drawString("ID: " + creature.getId(), creatureX - 15, creatureY + 30);
+            g.drawString("Ancestors: " + creature.getShortAncestorsAsString(), creatureX - 15, creatureY + 45);
             g.drawString(String.format("survivalRate: %.2f%%", survivalRate * 100), creatureX - 15, creatureY + 60);
-            g.drawString(String.format("furLength: %.2f", furLength), creatureX -15, creatureY + 75);
+            g.drawString(String.format("furLength: %.2f", furLength), creatureX - 15, creatureY + 75);
         }
 
         // Calculate the mean of furLength
@@ -63,6 +63,8 @@ public class MapView extends JPanel {
         double meanFurLength = creatures.isEmpty() ? 0 : totalFurLength / creatures.size();
 
         // Display the count of creatures
+        Font font = new Font("Arial", Font.BOLD, 25);
+        g.setFont(font);
         g.setColor(Color.BLACK);
         g.drawString("Number of Creatures: " + creatures.size(), 10, 20);
         g.drawString("Mean of furLength: " + meanFurLength, 10, 40);

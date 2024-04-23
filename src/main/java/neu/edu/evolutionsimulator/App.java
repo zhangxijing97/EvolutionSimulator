@@ -37,7 +37,7 @@ public class App {
     private static int screenHeight = (int) screenSize.getHeight();
 
     public static void main(String[] args) {
-        map = new Map(screenWidth-400, screenHeight-200);
+        map = new Map(screenWidth - 400, screenHeight - 200);
         creatureGenerator = new CreatureGenerator(map);
         creatureInitializer = new CreatureInitializer(map);
         temperature = 0;
@@ -81,16 +81,18 @@ public class App {
         controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
         JButton initializeButton = new JButton("Initialize Creatures");
+        initializeButton.setFont(new Font("Arial", Font.PLAIN, 20));
         initializeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creatureInitializer.reinitializeCreatures(20);
                 mapView.repaint();
             }
         });
-        
+
         controlPanel.add(initializeButton);
 
         JButton generateButton = new JButton("Generate Creatures");
+        generateButton.setFont(new Font("Arial", Font.PLAIN, 20));
 
         generateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -105,6 +107,7 @@ public class App {
         controlPanel.add(generateButton);
 
         JButton startButton = new JButton("Start");
+        startButton.setFont(new Font("Arial", Font.PLAIN, 20));
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startSimulation();
@@ -113,6 +116,7 @@ public class App {
         controlPanel.add(startButton);
 
         JButton stopButton = new JButton("Stop");
+        stopButton.setFont(new Font("Arial", Font.PLAIN, 20));
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 stopSimulation();
@@ -122,6 +126,8 @@ public class App {
         controlPanel.add(stopButton);
 
         JButton resetButton = new JButton("Reset");
+        resetButton.setFont(new Font("Arial", Font.PLAIN, 20));
+
         resetButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 resetSimulation();
